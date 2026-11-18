@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Riders MC | Ямбол - Ride Free Or Die</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Oswald:wght@600;700&family=Pirata+One&display=swap" rel="stylesheet">
+<style>
+@font-face {
+    font-family: 'DS Kork';
+    src: url('DSKork.ttf') format('truetype'), local('DS Kork');
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #09090b;
+    color: #f3f4f6;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.club-title {
+    font-family: 'DS Kork', 'Pirata One', serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: linear-gradient(180deg, #fff099 15%, #eab308 55%, #b45309 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.95));
+}
+h2, h3 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+nav {
+    position: sticky;
+    top: 0;
+    background: rgba(9, 9, 11, 0.96);
+    border-bottom: 2px solid #eab308;
+    padding: 12px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+.brand img { height: 42px; }
+.menu {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    flex-wrap: wrap;
+}
+.menu a {
+    color: #f3f4f6;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+.menu a:hover, .menu a.active {
+    background: #eab308;
+    color: #000;
+}
+.menu-btn {
+    display: none;
+    background: none;
+    border: 1px solid #eab308;
+    color: #eab308;
+    font-size: 1.5rem;
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.sec { display: none; flex: 1; animation: fadeIn 0.35s ease; }
+.sec.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.slider {
+    position: relative;
+    height: 82vh;
+    min-height: 520px;
+    overflow: hidden;
+    border-bottom: 2px solid #eab308;
+}
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+.slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.82) 100%);
+}
+.slide.active { opacity: 1; z-index: 1; }
+.s-box { position: relative; z-index: 2; max-width: 900px; }
+.s-box h1 { font-size: clamp(3rem, 8vw, 5.8rem); margin: 8px 0; }
+.s-box h2 { font-size: clamp(2rem, 5vw, 3.6rem); color: #eab308; margin: 8px 0; text-shadow: 0 3px 10px #000; }
+.motto { color: #ef4444; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; font-size: 1.15rem; text-shadow: 0 2px 6px #000; }
+.s-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.7);
+    color: #eab308;
+    border: 1px solid #eab308;
+    padding: 12px 16px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.s-btn:hover { background: #eab308; color: #000; }
+.prev { left: 18px; }
+.next { right: 18px; }
+
+.btn {
+    background: #eab308;
+    color: #000;
+    padding: 13px 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 6px;
+    font-size: 0.9rem;
+    transition: 0.25s;
+}
+.btn:hover { background: #ca8a04; transform: translateY(-2px); }
+.btn-o { background: rgba(0,0,0,0.5); border: 2px solid #eab308; color: #eab308; }
+.btn-o:hover { background: #eab308; color: #000; }
+
+.wrap { padding: 60px 8%; max-width: 1250px; margin: 0 auto; }
+.title { text-align: center; font-size: 2.3rem; color: #eab308; margin-bottom: 12px; }
+.line { width: 80px; height: 3px; background: #dc2626; margin: 0 auto 40px; }
+.card { background: #141417; border: 1px solid #27272a; border-radius: 8px; padding: 30px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+.g-img { width: 100%; height: 230px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 1px solid #27272a; transition: 0.3s; }
+.g-img:hover { transform: scale(1.03); border-color: #eab308; }
+.iban { background: #000; border: 1px dashed #eab308; padding: 16px; margin: 18px 0; color: #eab308; font-weight: 900; font-size: 1.15rem; word-break: break-all; border-radius: 6px; }
+
+.modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 200; justify-content: center; align-items: center; padding: 20px; }
+.m-box { background: #141417; border: 2px solid #eab308; padding: 28px; border-radius: 8px; max-width: 430px; width: 100%; position: relative; }
+.m-box input { width: 100%; padding: 12px; margin: 8px 0; background: #09090b; border: 1px solid #333; color: #fff; border-radius: 4px; }
+.close { position: absolute; top: 10px; right: 16px; font-size: 30px; cursor: pointer; color: #fff; }
+footer { background: #050506; text-align: center; padding: 22px; border-top: 1px solid #27272a; color: #9ca3af; font-size: 0.85rem; margin-top: auto; }
+
+@media (max-width: 850px) {
+    .menu-btn { display: block; }
+    .menu { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; width: 100%; background: #09090b; border-bottom: 2px solid #eab308; padding: 15px; text-align: center; }
+    .menu.show { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="brand" onclick="go('home')">
+        <img src="logo30.png" alt="" onerror="this.style.display='none'">
+        <span class="club-title">THE RIDERS MC</span>
+    </div>
+    <button class="menu-btn" onclick="document.getElementById('nav-menu').classList.toggle('show')">☰</button>
+    <ul class="menu" id="nav-menu">
+        <li><a onclick="go('home')" id="m-home" class="active">Начало</a></li>
+        <li><a onclick="go('about')" id="m-about">За клуба</a></li>
+        <li><a onclick="go('events')" id="m-events">Събития</a></li>
+        <li><a onclick="go('gallery')" id="m-gallery">Галерия</a></li>
+        <li><a onclick="go('shop')" id="m-shop">Фен Шоп</a></li>
+        <li><a onclick="go('donate')" id="m-donate">Дарения</a></li>
+        <li><a onclick="go('contact')" id="m-contact">Контакти</a></li>
+    </ul>
+</nav>
+
+<div id="home" class="sec active">
+    <div class="slider">
+        <div class="slide active" style="background-image: url('bg1.jpg'), url('bg1.png');">
+            <div class="s-box">
+                <img src="logo30.png" style="max-width: 185px; margin-bottom: 10px;" onerror="this.style.display='none'">
+                <div class="motto">Ride Free Or Die</div>
+                <h1 class="club-title">THE RIDERS MC</h1>
+                <p style="font-size: 1.15rem; margin-bottom: 20px; font-weight: 600;">гр. Ямбол • Основан на 26 Октомври 1996 г.</p>
+                <button class="btn" onclick="go('events')">Мото Събор 2027</button>
+                <button class="btn btn-o" onclick="go('shop')">Фен Шоп</button>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('bg2.jpg'), url('bg2.png');">
+            <div class="s-box">
+                <div class="motto">30 Години Братство и Традиции</div>
+                <h2>Традиционен Мото Събор</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 20px; font-weight: 600;">14, 15 и 16 Май 2027 г. • град Ямбол</p>
+                <button class="btn" onclick="go('events')">Виж събитието</button>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('bg3.jpg'), url('bg3.png');">
+            <div class="s-box">
+                <div class="motto">Подкрепи клуба</div>
+                <h2>Официален Фен Шоп</h2>
+                <p style="font-size: 1.15rem; margin-bottom: 20px; font-weight: 600;">Тениски, нашивки, шапки и клубни сувенири</p>
+                <button class="btn" onclick="go('shop')">Към магазина</button>
+            </div>
+        </div>
+        <button class="s-btn prev" onclick="step(-1)">&#10094;</button>
+        <button class="s-btn next" onclick="step(1)">&#10095;</button>
+    </div>
+    <div class="wrap" style="text-align: center;">
+        <h2 class="title">Добре дошли в дома на <span class="club-title" style="font-size: 2.6rem;">THE RIDERS MC</span></h2>
+        <div class="line"></div>
+        <p style="color: #9ca3af; max-width: 780px; margin: 0 auto 25px;">
+            Официален уебсайт на Сдружение „The Riders MC“ – гр. Ямбол. Разгледайте историята на клуба, предстоящия ни традиционен мото събор през май 2027 г., галерията със снимки, официалния фен шоп или начините да подкрепите дейността ни.
+        </p>
+        <button class="btn" onclick="go('about')">История на клуба</button>
+        <button class="btn btn-o" onclick="go('donate')">Подкрепи ни</button>
+    </div>
+</div>
+
+<div id="about" class="sec">
+    <div class="wrap">
+        <h2 class="title">За Клуба</h2>
+        <div class="line"></div>
+        <div class="card" style="border-left: 4px solid #eab308;">
+            <p style="margin-bottom: 15px;"><strong>The Riders MC</strong> е създаден на <strong>26 октомври 1996 г.</strong> в град Ямбол. Вече три десетилетия клубът обединява свободолюбиви мотористи, за които пътят, взаимното уважение и братството са начин на живот.</p>
+            <p style="margin-bottom: 15px;">Клубната ни къща се намира в <strong>гр. Ямбол, ул. „Граф Игнатиев“ 9</strong>.</p>
+            <p>Регистрирани сме като сдружение с нестопанска цел и организираме традиционни мото събори, благотворителни каузи и инициативи за безопасност на пътя.</p>
+        </div>
+    </div>
+</div>
+
+<div id="events" class="sec">
+    <div class="wrap">
+        <h2 class="title">Предстоящи Събития</h2>
+        <div class="line"></div>
+        <div class="card" style="border-left: 5px solid #dc2626;">
+            <h3 style="color: #eab308; font-size: 1.6rem; margin-bottom: 10px;">Традиционен Мото Събор — The Riders MC</h3>
+            <p style="color: #ef4444; font-weight: 800; font-size: 1.1rem; margin-bottom: 12px;">📅 14, 15 и 16 Май 2027 г. &nbsp;|&nbsp; 📍 гр. Ямбол</p>
+            <p style="margin-bottom: 18px;">Три дни рок музика на живо, почетна обиколка, атрактивни игри, студена бира и истинска рокерска атмосфера с братя от цялата страна! Очаквайте пълната програма и локация скоро.</p>
+            <button class="btn" onclick="go('contact')">Свържи се с нас</button>
+        </div>
+    </div>
+</div>
+
+<div id="gallery" class="sec">
+    <div class="wrap">
+        <h2 class="title">Галерия</h2>
+        <div class="line"></div>
+        <div class="grid">
+            <img src="bg1.png" onerror="this.src='bg1.jpg'" class="g-img" onclick="zoom(this.src)" alt="На пътя">
+            <img src="bg2.png" onerror="this.src='bg2.jpg'" class="g-img" onclick="zoom(this.src)" alt="Мото събор">
+            <img src="bg3.png" onerror="this.src='bg3.jpg'" class="g-img" onclick="zoom(this.src)" alt="Емблема">
+        </div>
+    </div>
+</div>
+
+<div id="shop" class="sec">
+    <div class="wrap">
+        <h2 class="title">Фен Шоп</h2>
+        <div class="line"></div>
+        <div class="grid">
+            <div class="card" style="text-align: center;">
+                <img src="bg3.png" onerror="this.src='bg3.jpg'" class="g-img" alt="Фен Тениска">
+                <h3 style="margin: 15px 0 6px; color: #f3f4f6;">Фен Тениска</h3>
+                <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 10px;">100% памук, размери S – XXL</p>
+                <p style="color: #eab308; font-weight: 900; font-size: 1.3rem; margin-bottom: 12px;">35.00 лв.</p>
+                <button class="btn" onclick="order('Фен Тениска - 35.00 лв.')">Поръчай</button>
+            </div>
+            <div class="card" style="text-align: center;">
+                <img src="bg1.png" onerror="this.src='bg1.jpg'" class="g-img" alt="Фен Нашивка">
+                <h3 style="margin: 15px 0 6px; color: #f3f4f6;">Фен Нашивка (Support)</h3>
+                <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 10px;">Висококачествена бродерия</p>
+                <p style="color: #eab308; font-weight: 900; font-size: 1.3rem; margin-bottom: 12px;">15.00 лв.</p>
+                <button class="btn" onclick="order('Фен Нашивка - 15.00 лв.')">Поръчай</button>
+            </div>
+            <div class="card" style="text-align: center;">
+                <img src="bg2.png" onerror="this.src='bg2.jpg'" class="g-img" alt="Клубна Шапка">
+                <h3 style="margin: 15px 0 6px; color: #f3f4f6;">Клубна Шапка</h3>
+                <p style="color: #9ca3af; font-size: 0.85rem; margin-bottom: 10px;">Черна с бродирано лого</p>
+                <p style="color: #eab308; font-weight: 900; font-size: 1.3rem; margin-bottom: 12px;">25.00 лв.</p>
+                <button class="btn" onclick="order('Клубна Шапка - 25.00 лв.')">Поръчай</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="donate" class="sec">
+    <div class="wrap">
+        <h2 class="title">Подкрепи Клуба</h2>
+        <div class="line"></div>
+        <div class="card" style="text-align: center; max-width: 720px; margin: 0 auto; border-top: 4px solid #dc2626;">
+            <p style="margin-bottom: 18px;">Всеки приятел и съмишленик, който желае да подпомогне организацията на нашите събори и инициативи, може да направи доброволно дарение по сметката на сдружението:</p>
+            <p style="margin-bottom: 6px;"><strong>Титуляр:</strong> Сдружение „The Riders MC“</p>
+            <p style="margin-bottom: 6px;"><strong>Банка:</strong> [Въведете име на банката]</p>
+            <p style="margin-bottom: 12px;"><strong>Основание:</strong> <span style="color: #eab308;">Дарение за организиране на мероприятия</span></p>
+            <div class="iban" id="iban">BG00 XXXX 0000 0000 0000 00</div>
+            <button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('iban').innerText);alert('IBAN номерът е копиран!')">Копирай IBAN</button>
+        </div>
+    </div>
+</div>
+
+<div id="contact" class="sec">
+    <div class="wrap">
+        <h2 class="title">Контакти</h2>
+        <div class="line"></div>
+        <div class="grid" style="text-align: center;">
+            <div class="card">
+                <h3 style="color: #eab308; margin-bottom: 10px;">Клубна къща</h3>
+                <p>гр. Ямбол<br>ул. „Граф Игнатиев“ 9</p>
+            </div>
+            <div class="card">
+                <h3 style="color: #eab308; margin-bottom: 10px;">Имейл и Телефон</h3>
+                <p>info@the-ridersmc.com<br>+359 888 000 000</p>
+            </div>
+            <div class="card">
+                <h3 style="color: #eab308; margin-bottom: 10px;">Социални мрежи</h3>
+                <p>Facebook:<br><a href="https://www.facebook.com/p/The-Riders-MC-100057614469563/" target="_blank" style="color: #eab308; font-weight: 700; text-decoration: none;">The Riders MC Bulgaria</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>© 1996 - 2027 Сдружение „The Riders MC“ – гр. Ямбол • Ride Free Or Die</footer>
+
+<div class="modal" id="z-mod" onclick="this.style.display='none'">
+    <span class="close">&times;</span>
+    <img id="z-img" style="max-width: 90%; max-height: 85vh; border: 2px solid #eab308; border-radius: 6px;">
+</div>
+
+<div class="modal" id="o-mod">
+    <div class="m-box">
+        <span class="close" onclick="document.getElementById('o-mod').style.display='none'">&times;</span>
+        <h3 style="color: #eab308; margin-bottom: 8px;">Заявка за артикул</h3>
+        <p id="o-item" style="color: #ef4444; font-weight: 700; margin-bottom: 12px;"></p>
+        <form onsubmit="send(event)">
+            <input id="oname" placeholder="Вашето име и фамилия" required>
+            <input id="otel" placeholder="Телефон за връзка" required>
+            <input id="osize" placeholder="Размер / Брой (напр. L - 1 бр.)">
+            <input id="ocity" placeholder="Град и офис на Еконт / Спиди" required>
+            <button class="btn" style="width: 100%; margin: 12px 0 0;">Изпрати заявка</button>
+        </form>
+    </div>
+</div>
+
+<script>
+let idx = 0, sl = document.querySelectorAll('.slide'), item = '';
+function go(id) {
+    document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('m-' + id).classList.add('active');
+    document.getElementById('nav-menu').classList.remove('show');
+    window.scrollTo(0, 0);
+}
+function step(d) {
+    sl[idx].classList.remove('active');
+    idx = (idx + d + sl.length) % sl.length;
+    sl[idx].classList.add('active');
+}
+setInterval(() => step(1), 5000);
+function zoom(s) {
+    document.getElementById('z-img').src = s;
+    document.getElementById('z-mod').style.display = 'flex';
+}
+function order(p) {
+    item = p;
+    document.getElementById('o-item').innerText = p;
+    document.getElementById('o-mod').style.display = 'flex';
+}
+function send(e) {
+    e.preventDefault();
+    const subj = encodeURIComponent('Поръчка от Фен Шоп: ' + item);
+    const body = encodeURIComponent('Артикул: ' + item + '
+Име: ' + document.getElementById('oname').value + '
+Телефон: ' + document.getElementById('otel').value + '
+Размер/Брой: ' + document.getElementById('osize').value + '
+Доставка: ' + document.getElementById('ocity').value);
+    location.href = 'mailto:info@the-ridersmc.com?subject=' + subj + '&body=' + body;
+    document.getElementById('o-mod').style.display = 'none';
+}
+</script>
+</body>
+</html>
