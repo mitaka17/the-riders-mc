@@ -15,22 +15,10 @@
   },
   "slides": [
     {
-      "image": "images/bmw-motorrad-4k-2018-cs-scaled-1.webp",
-      "motto": "Ride Free Or Die",
-      "title": "THE RIDERS MC",
-      "subtitle": "Ямбол, България • Основан на 26 Октомври 1996 г."
-    },
-    {
       "image": "images/bg1.jpg",
-      "motto": "30 Години Братство на пътя",
-      "title": "Традиционен Мото Събор",
-      "subtitle": "14, 15 и 16 Май 2027 г. • град Ямбол"
-    },
-    {
-      "image": "images/bg3.jpg",
-      "motto": "Подкрепи клуба",
-      "title": "Официален Фен Шоп",
-      "subtitle": "Клубни тениски, нашивки, шапки и аксесоари"
+      "motto": "30 Години Братство",
+      "title": "THE RIDERS MC",
+      "subtitle": "Ямбол - От 1996г. на пътя"
     }
   ],
   "events": [
