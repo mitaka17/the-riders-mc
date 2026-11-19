@@ -1,0 +1,70 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "settings"
+    label: "Настройки и Съдържание на сайта"
+    files:
+      - label: "Всички секции на сайта"
+        name: "site_data"
+        file: "data/site-data.json"
+        fields:
+          - label: "Начален слайдър (Фонови снимки)"
+            name: "slides"
+            widget: "list"
+            fields:
+              - {label: "Мото / Малък надпис отгоре", name: "motto", widget: "string", required: false}
+              - {label: "Голямо заглавие", name: "title", widget: "string", required: false}
+              - {label: "Подзаглавие / Текст", name: "description", widget: "string", required: false}
+              - {label: "Фонова снимка", name: "image", widget: "image", required: false}
+
+          - label: "За клуба (Текст)"
+            name: "about"
+            widget: "text"
+            required: false
+
+          - label: "Събития"
+            name: "events"
+            widget: "list"
+            fields:
+              - {label: "Име на събитието", name: "title", widget: "string", required: false}
+              - {label: "Дата", name: "date", widget: "string", required: false}
+              - {label: "Място", name: "location", widget: "string", required: false}
+              - {label: "Описание", name: "description", widget: "text", required: false}
+
+          - label: "Галерия (Снимки)"
+            name: "gallery"
+            widget: "list"
+            fields:
+              - {label: "Снимка", name: "image", widget: "image", required: false}
+              - {label: "Описание на снимката", name: "caption", widget: "string", required: false}
+
+          - label: "Фен Шоп (Артикули)"
+            name: "shop"
+            widget: "list"
+            fields:
+              - {label: "Име на артикула", name: "name", widget: "string", required: false}
+              - {label: "Цена (напр. 10 Евро / 20 лв.)", name: "price", widget: "string", required: false}
+              - {label: "Описание / Размери", name: "description", widget: "string", required: false}
+              - {label: "Снимка на артикула", name: "image", widget: "image", required: false}
+
+          - label: "Дарения (Банкова сметка)"
+            name: "donations"
+            widget: "object"
+            fields:
+              - {label: "Титуляр на сметката", name: "holder", widget: "string", required: false}
+              - {label: "Име на банката", name: "bank", widget: "string", required: false}
+              - {label: "IBAN", name: "iban", widget: "string", required: false}
+
+          - label: "Контакти (Най-отдолу)"
+            name: "contacts"
+            widget: "object"
+            fields:
+              - {label: "Адрес на клубната къща", name: "address", widget: "string", required: false}
+              - {label: "Телефон за връзка", name: "phone", widget: "string", required: false}
+              - {label: "Имейл адрес", name: "email", widget: "string", required: false}
+              - {label: "Линк към Facebook страницата", name: "facebook", widget: "string", required: false}
