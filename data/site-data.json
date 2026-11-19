@@ -55,18 +55,6 @@
       "price": "10 Евро",
       "description": "100% памук, размери S, M, L, XL, XXL",
       "image": "images/bg4.jpg.jpg"
-    },
-    {
-      "name": "Фен нашивка (Support Patch)",
-      "price": "15.00 лв.",
-      "description": "Висококачествена бродерия за елек или яке",
-      "image": "images/bg4.jpg.jpg"
-    },
-    {
-      "name": "Рокерска шапка с козирка",
-      "price": "25.00 лв.",
-      "description": "Черна с бродирано лого The Riders MC",
-      "image": "images/bg1.jpg"
     }
   ]
 }
