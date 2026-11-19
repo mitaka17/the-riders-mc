@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Riders MC | Ямбол - Ride Free Or Die</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Oswald:wght@600;700&family=Pirata+One&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+@font-face {
+  font-family: 'DSKork';
+  src: url('DSKork.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --bg-dark: #09090b;
+  --bg-card: #141417;
+  --gold: #eab308;
+  --gold-hover: #ca8a04;
+  --red: #dc2626;
+  --text-light: #f3f4f6;
+  --text-muted: #9ca3af;
+  --border: #27272a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.club-font {
+  font-family: 'DSKork', 'Pirata One', serif !important;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #eab308;
+  background: linear-gradient(180deg, #fef08a 15%, #eab308 55%, #b45309 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.95));
+}
+nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(9, 9, 11, 0.96);
+  border-bottom: 2px solid var(--gold);
+  z-index: 1000;
+  padding: 12px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+.nav-brand img {
+  height: 44px;
+  width: auto;
+}
+.nav-links {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.nav-links a:hover, .nav-links a.active {
+  background: var(--gold);
+  color: #000;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 1.5rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.page-section {
+  display: none;
+  flex: 1;
+}
+.page-section.active {
+  display: block;
+}
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 82vh;
+  min-height: 520px;
+  overflow: hidden;
+  border-bottom: 2px solid var(--gold);
+  background: #000;
+}
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.58);
+  z-index: 1;
+}
+.slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+.slide-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+}
+.slide-logo {
+  max-width: 190px;
+  height: auto;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.45));
+}
+.motto {
+  color: var(--red);
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 4px #000;
+}
+.slide h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.slide h2 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  color: var(--gold);
+  margin-bottom: 12px;
+  text-shadow: 2px 2px 8px #000;
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 12px 17px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.slider-btn:hover { background: var(--gold); color: #000; }
+.prev-btn { left: 18px; }
+.next-btn { right: 18px; }
+.btn {
+  display: inline-block;
+  background: var(--gold);
+  color: #000;
+  padding: 13px 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin: 5px;
+  transition: 0.3s;
+}
+.btn:hover { background: var(--gold-hover); }
+.btn-outline {
+  background: rgba(0,0,0,0.45);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+}
+.btn-outline:hover { background: var(--gold); color: #000; }
+.container {
+  padding: 60px 8%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.section-title {
+  text-align: center;
+  font-size: 2.3rem;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.section-line {
+  width: 80px;
+  height: 3px;
+  background: var(--red);
+  margin: 0 auto 40px;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 30px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+.gallery-item {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  background: #101012;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+}
+.gallery-item:hover img { transform: scale(1.07); }
+.gallery-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.product-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  background: #0f0f11;
+}
+.product-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.product-price {
+  color: var(--gold);
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin: 10px 0;
+}
+.event-card {
+  background: linear-gradient(145deg, #18181b, #101012);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.event-date {
+  background: var(--red);
+  color: #fff;
+  padding: 18px 24px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.3rem;
+  min-width: 180px;
+}
+.iban-box {
+  background: #000;
+  border: 1px dashed var(--gold);
+  padding: 16px;
+  margin: 18px 0;
+  color: var(--gold);
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  word-break: break-all;
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.modal-box {
+  background: var(--bg-card);
+  border: 2px solid var(--gold);
+  padding: 28px;
+  border-radius: 8px;
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+}
+.modal-box input {
+  width: 100%;
+  padding: 11px;
+  margin: 8px 0;
+  background: #09090b;
+  border: 1px solid var(--border);
+  color: #fff;
+  border-radius: 4px;
+}
+.close-btn {
+  position: absolute;
+  top: 12px; right: 18px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+footer {
+  background: #050506;
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-top: auto;
+}
+@media (max-width: 850px) {
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px; left: 0; width: 100%;
+    background: #09090b;
+    border-bottom: 2px solid var(--gold);
+    padding: 15px;
+    text-align: center;
+  }
+  .nav-links.show { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand" onclick="showPage('home')">
+    <img src="logo30.png" alt="Logo" onerror="this.style.display='none'">
+    <span class="club-font">THE RIDERS MC</span>
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a onclick="showPage('home')" id="link-home" class="active">Начало</a></li>
+    <li><a onclick="showPage('about')" id="link-about">За клуба</a></li>
+    <li><a onclick="showPage('events')" id="link-events">Събития</a></li>
+    <li><a onclick="showPage('gallery')" id="link-gallery">Галерия</a></li>
+    <li><a onclick="showPage('shop')" id="link-shop">Фен Шоп</a></li>
+    <li><a onclick="showPage('donate')" id="link-donate">Дарения</a></li>
+    <li><a onclick="showPage('contact')" id="link-contact">Контакти</a></li>
+  </ul>
+</nav>
+
+<div id="home" class="page-section active">
+  <div class="slider-container" id="slider-wrapper">
+    <div class="slide active" style="background-image: url('images/bg1.jpg');">
+      <div class="slide-content">
+        <img src="logo30.png" alt="The Riders MC" class="slide-logo" onerror="this.style.display='none'">
+        <div class="motto">Ride Free Or Die</div>
+        <h1 class="club-font">THE RIDERS MC</h1>
+        <p style="font-size: 1.15rem; margin-bottom: 20px;">Ямбол • Основан на 26 Октомври 1996 г.</p>
+        <button class="btn" onclick="showPage('events')">Мото Събор 2027</button>
+        <button class="btn btn-outline" onclick="showPage('shop')">Фен Шоп</button>
+      </div>
+    </div>
+    <button class="slider-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="slider-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+  </div>
+  <div class="container" style="text-align: center;">
+    <h2 class="section-title">Добре дошли в дома на <span class="club-font">THE RIDERS MC</span></h2>
+    <div class="section-line"></div>
+    <p style="max-width: 800px; margin: 0 auto 25px; color: var(--text-muted);" id="home-welcome">
+      Официален уебсайт на Сдружение „The Riders MC“ – гр. Ямбол. Разгледайте историята на клуба, предстоящия ни традиционен мото събор през май 2027 г., галерията от карания, фен шопа или подкрепете инициативите на клуба.
+    </p>
+    <button class="btn" onclick="showPage('about')">За клуба</button>
+    <button class="btn btn-outline" onclick="showPage('donate')">Подкрепи ни</button>
+  </div>
+</div>
+
+<div id="about" class="page-section">
+  <div class="container">
+    <h2 class="section-title">За Клуба</h2>
+    <div class="section-line"></div>
+    <div class="card" id="about-content">
+      <p style="margin-bottom: 15px;"><strong>The Riders MC</strong> е създаден на <strong>26 октомври 1996 г.</strong> в град Ямбол. Вече три десетилетия клубът обединява свободолюбиви мотористи, за които пътят, взаимното уважение и братството са начин на живот.</p>
+      <p>Клубната къща се намира на <strong>ул. „Граф Игнатиев“ 9, гр. Ямбол</strong>. Регистрирани сме като сдружение с нестопанска цел.</p>
+    </div>
+  </div>
+</div>
+
+<div id="events" class="page-section">
+  <div class="container">
+    <h2 class="section-title">Събития</h2>
+    <div class="section-line"></div>
+    <div id="events-list">
+      <div class="event-card">
+        <div class="event-date">14 - 16 Май 2027 г.</div>
+        <div style="flex: 1; min-width: 250px;">
+          <h3 style="color: var(--gold); margin-bottom: 8px;">Традиционен Мото Събор — The Riders MC</h3>
+          <p style="color: var(--text-muted); margin-bottom: 8px;">📍 Място: гр. Ямбол</p>
+          <p>Три дни рок музика на живо, атрактивни игри, почетна обиколка, студена бира и истинска рокерска атмосфера!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="gallery" class="page-section">
+  <div class="container">
+    <h2 class="section-title">Галерия</h2>
+    <div class="section-line"></div>
+    <div class="grid" id="gallery-list"></div>
+  </div>
+</div>
+
+<div id="shop" class="page-section">
+  <div class="container">
+    <h2 class="section-title">Фен Шоп</h2>
+    <div class="section-line"></div>
+    <div class="grid" id="shop-list"></div>
+  </div>
+</div>
+
+<div id="donate" class="page-section">
+  <div class="container">
+    <h2 class="section-title">Подкрепи Клуба</h2>
+    <div class="section-line"></div>
+    <div class="card" style="text-align: center; max-width: 750px; margin: 0 auto;">
+      <p style="margin-bottom: 15px;">Всеки приятел и съмишленик, който желае да подпомогне организацията на събитията на клуба, може да го направи чрез доброволно дарение по официалната сметка:</p>
+      <p><strong>Титуляр:</strong> <span id="don-holder">Сдружение „The Riders MC“</span></p>
+      <p><strong>Банка:</strong> <span id="don-bank">—</span></p>
+      <p><strong>Основание:</strong> <span style="color: var(--gold);">Дарение за организиране на мероприятия</span></p>
+      <div class="iban-box" id="don-iban">BG00 XXXX 0000 0000 0000 00</div>
+      <button class="btn" onclick="copyIban()">Копирай IBAN</button>
+    </div>
+  </div>
+</div>
+
+<div id="contact" class="page-section">
+  <div class="container">
+    <h2 class="section-title">Контакти</h2>
+    <div class="section-line"></div>
+    <div class="grid" style="text-align: center;">
+      <div class="card">
+        <h3 style="color: var(--gold); margin-bottom: 10px;">Клубна къща</h3>
+        <p id="cont-address">гр. Ямбол, ул. „Граф Игнатиев“ 9</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--gold); margin-bottom: 10px;">Телефон и Имейл</h3>
+        <p><span id="cont-phone">+359 888 000 000</span><br><span id="cont-email">info@the-ridersmc.com</span></p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--gold); margin-bottom: 10px;">Социални мрежи</h3>
+        <p><a id="cont-fb" href="#" target="_blank" style="color: var(--gold); font-weight: bold; text-decoration: none;">Facebook: The Riders MC</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 1996 - 2027 Сдружение „The Riders MC“ – Ямбол • Ride Free Or Die</p>
+</footer>
+
+<div class="modal" id="zoom-modal" onclick="this.style.display='none'">
+  <span class="close-btn">&times;</span>
+  <img id="zoom-img" src="" style="max-width: 92%; max-height: 86vh; border: 2px solid var(--gold); border-radius: 6px;">
+</div>
+
+<div class="modal" id="order-modal">
+  <div class="modal-box">
+    <span class="close-btn" onclick="document.getElementById('order-modal').style.display='none'">&times;</span>
+    <h3 style="color: var(--gold); margin-bottom: 8px;">Поръчка на артикул</h3>
+    <p id="order-item-title" style="color: var(--red); font-weight: bold; margin-bottom: 12px;"></p>
+    <form onsubmit="submitOrder(event)">
+      <input id="o-name" placeholder="Вашето име и фамилия" required>
+      <input id="o-phone" placeholder="Телефон за връзка" required>
+      <input id="o-size" placeholder="Размер / Брой (напр. L - 1 бр.)">
+      <input id="o-city" placeholder="Град и офис на Еконт / Спиди" required>
+      <button type="submit" class="btn" style="width: 100%; margin: 10px 0 0;">Изпрати заявка</button>
+    </form>
+  </div>
+</div>
+
+<script>
+let currentSlide = 0;
+let slides = [];
+let clubEmail = 'info@the-ridersmc.com';
+let selectedProduct = '';
+
+function fixImgPath(p) {
+  if (!p) return '';
+  let clean = String(p).trim();
+  if (clean.startsWith('/')) clean = clean.substring(1);
+  return clean;
+}
+
+function showPage(id) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('link-' + id).classList.add('active');
+  document.getElementById('nav-links').classList.remove('show');
+  window.scrollTo(0, 0);
+}
+
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('show');
+}
+
+function changeSlide(dir) {
+  slides = document.querySelectorAll('.slide');
+  if (slides.length <= 1) return;
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (currentSlide + dir + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+}
+
+setInterval(() => changeSlide(1), 5500);
+
+function zoomImg(src) {
+  document.getElementById('zoom-img').src = src;
+  document.getElementById('zoom-modal').style.display = 'flex';
+}
+
+function openOrder(title) {
+  selectedProduct = title;
+  document.getElementById('order-item-title').innerText = title;
+  document.getElementById('order-modal').style.display = 'flex';
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  const subj = encodeURIComponent('Поръчка от Фен Шоп: ' + selectedProduct);
+  const body = encodeURIComponent(
+    'Артикул: ' + selectedProduct + '
+' +
+    'Име: ' + document.getElementById('o-name').value + '
+' +
+    'Телефон: ' + document.getElementById('o-phone').value + '
+' +
+    'Размер/Брой: ' + document.getElementById('o-size').value + '
+' +
+    'Доставка: ' + document.getElementById('o-city').value
+  );
+  window.location.href = `mailto:${clubEmail}?subject=${subj}&body=${body}`;
+  document.getElementById('order-modal').style.display = 'none';
+}
+
+function copyIban() {
+  const txt = document.getElementById('don-iban').innerText;
+  navigator.clipboard.writeText(txt).then(() => alert('IBAN номерът е копиран: ' + txt));
+}
+
+fetch('data/site-data.json?v=' + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    if (data.slides && data.slides.length > 0) {
+      const wrap = document.getElementById('slider-wrapper');
+      let html = '';
+      data.slides.forEach((s, i) => {
+        const imgUrl = fixImgPath(s.image) || 'images/bg1.jpg';
+        const isFirst = (i === 0);
+        html += `
+          <div class="slide ${isFirst ? 'active' : ''}" style="background-image: url('${imgUrl}');">
+            <div class="slide-content">
+              ${isFirst ? `<img src="logo30.png" alt="Logo" class="slide-logo" onerror="this.style.display='none'">` : ''}
+              <div class="motto">${s.motto || 'Ride Free Or Die'}</div>
+              ${isFirst ? `<h1 class="club-font">${s.title || 'THE RIDERS MC'}</h1>` : `<h2>${s.title || ''}</h2>`}
+              <p style="font-size: 1.15rem; margin-bottom: 20px;">${s.subtitle || ''}</p>
+              <button class="btn" onclick="showPage('events')">Мото Събор 2027</button>
+              <button class="btn btn-outline" onclick="showPage('shop')">Фен Шоп</button>
+            </div>
+          </div>`;
+      });
+      html += `<button class="slider-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+               <button class="slider-btn next-btn" onclick="changeSlide(1)">&#10095;</button>`;
+      wrap.innerHTML = html;
+      currentSlide = 0;
+    }
+
+    if (data.about) {
+      document.getElementById('about-content').innerHTML = `<p style="white-space: pre-line;">${data.about}</p>`;
+    }
+
+    if (data.events && data.events.length > 0) {
+      document.getElementById('events-list').innerHTML = data.events.map(ev => `
+        <div class="event-card">
+          <div class="event-date">${ev.date || ''}</div>
+          <div style="flex: 1; min-width: 250px;">
+            <h3 style="color: var(--gold); margin-bottom: 8px;">${ev.title || ''}</h3>
+            <p style="color: var(--text-muted); margin-bottom: 8px;">📍 ${ev.location || ''}</p>
+            <p>${ev.description || ''}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    if (data.gallery && data.gallery.length > 0) {
+      document.getElementById('gallery-list').innerHTML = data.gallery.map(g => {
+        const src = fixImgPath(g.image || g);
+        const cap = g.caption || '';
+        return `
+          <div class="gallery-item" onclick="zoomImg('${src}')">
+            <img src="${src}" alt="${cap}">
+            ${cap ? `<div class="gallery-caption">${cap}</div>` : ''}
+          </div>`;
+      }).join('');
+    }
+
+    if (data.shop && data.shop.length > 0) {
+      document.getElementById('shop-list').innerHTML = data.shop.map(p => {
+        const src = fixImgPath(p.image);
+        return `
+          <div class="product-card">
+            <img src="${src}" alt="${p.name || ''}">
+            <div class="product-body">
+              <div>
+                <h3 style="margin-bottom: 6px;">${p.name || ''}</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">${p.description || ''}</p>
+              </div>
+              <div>
+                <div class="product-price">${p.price || ''}</div>
+                <button class="btn" onclick="openOrder('${(p.name || '').replace(/'/g, '')} - ${p.price || ''}')">Поръчай</button>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    if (data.donation) {
+      if (data.donation.holder) document.getElementById('don-holder').innerText = data.donation.holder;
+      if (data.donation.bank) document.getElementById('don-bank').innerText = data.donation.bank;
+      if (data.donation.iban) document.getElementById('don-iban').innerText = data.donation.iban;
+    }
+
+    if (data.contact) {
+      if (data.contact.address) document.getElementById('cont-address').innerText = data.contact.address;
+      if (data.contact.phone) document.getElementById('cont-phone').innerText = data.contact.phone;
+      if (data.contact.email) {
+        clubEmail = data.contact.email;
+        document.getElementById('cont-email').innerText = data.contact.email;
+      }
+      if (data.contact.facebook) {
+        document.getElementById('cont-fb').href = data.contact.facebook;
+      }
+    }
+  })
+  .catch(() => {});
+
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', user => {
+    if (!user) {
+      window.netlifyIdentity.on('login', () => {
+        document.location.href = '/admin/';
+      });
+    }
+  });
+}
+</script>
+</body>
+</html>
